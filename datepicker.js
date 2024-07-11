@@ -82,7 +82,7 @@ class Datepicker extends HTMLElement {
     constructor() {
         super();
 
-        // open allows the usage of this.shadowRoot
+        // open allows the usage of this.shadowRootRoot
         const shadow = this.attachShadow({ mode: "open" });
         const clone = template.content.cloneNode(true);
         shadow.append(clone);
@@ -90,8 +90,6 @@ class Datepicker extends HTMLElement {
         this._value = null;
 
         const that = this;
-
-        this.shadow = shadow;
 
         let options = {
             months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "Decemeber"],
@@ -298,7 +296,6 @@ class Datepicker extends HTMLElement {
             shadow.getElementById("dropdown").className = "dropdown hidden";
 
             that._value = `${viewYear}-${month}-${day}`;
-            console.log("setDate", that._value);
         }
     }
 
@@ -312,21 +309,24 @@ class Datepicker extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (name == "input-style") {
-            this.shadow.getElementById("input-date").style.cssText = newValue;
+            this.shadowRoot.getElementById("input-date").style.cssText = newValue;
         }
 
         // if (name == "date") {
-        //     this.shadow.getElementById("input-date").value = newValue;
+        //     this.shadowRoot.getElementById("input-date").value = newValue;
         //     this._value = newValue;
         // }
     }
 
-    // updateValue(value) {
-    //     console.log("updateValue", value);
-    // }
-
     get value() {
         return this._value;
+    }
+
+    set value(value) {
+        const [year, month, day] = value.split("-");
+
+        this._value = value;
+        this.shadowRoot.getElementById("input-date").value = `${day}.${month}.${year}`;
     }
 
     disconnectedCallback() {
