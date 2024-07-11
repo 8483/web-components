@@ -280,11 +280,11 @@ class Datepicker extends HTMLElement {
                 let tbody = `<tbody>${rows}</tbody>`;
 
                 shadow.getElementById("date-table").innerHTML = `${thead}${tbody}`;
-            }
 
-            shadow.querySelectorAll(".cell, .cell-active").forEach((cell) => {
-                cell.addEventListener("click", setDate);
-            });
+                shadow.querySelectorAll(".cell, .cell-active").forEach((cell) => {
+                    cell.addEventListener("click", setDate);
+                });
+            }
         }
 
         function setDate(e) {
