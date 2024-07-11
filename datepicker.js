@@ -288,17 +288,16 @@ class Datepicker extends HTMLElement {
         }
 
         function setDate(e) {
-            console.log(e);
+            let day = e.target.innerText;
+            selectedDay = day;
 
-            selectedDay = e.target.innerText;
+            day = day.toString().padStart(2, "0");
+            let month = (viewMonth + 1).toString().padStart(2, "0");
 
-            let day = selectedDay.toString().padStart(2, "0");
-            let month = (selectedMonth + 1).toString().padStart(2, "0");
-
-            shadow.getElementById("input-date").value = `${day}.${month}.${selectedYear}`;
+            shadow.getElementById("input-date").value = `${day}.${month}.${viewYear}`;
             shadow.getElementById("dropdown").className = "dropdown hidden";
 
-            that._value = `${selectedYear}-${month}-${day}`;
+            that._value = `${viewYear}-${month}-${day}`;
             console.log("setDate", that._value);
         }
     }
