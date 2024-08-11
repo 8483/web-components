@@ -21,3 +21,5 @@
     </body>
 </html>
 ```
+
+[DEMO](https://jsbin.com/loqadatoji/edit?html,js,console,output)
